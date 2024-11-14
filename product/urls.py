@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from django.urls import path, include
 from rest_framework import routers
 
@@ -9,16 +8,4 @@ router.register(r'product', viewsets.ProductViewSet, basename='product')
 
 urlpatterns = [
     path('', include(router.urls)),
-=======
-from django.urls import path, include
-from rest_framework import routers
-
-from product import viewsets
-
-router = routers.SimpleRouter()
-router.register(r'product', viewsets.ProductViewSet, basename='product')
-
-urlpatterns = [
-    path('', include(router.urls)),
->>>>>>> pagination
 ]
