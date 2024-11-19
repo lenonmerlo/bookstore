@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 
+from django.conf.global_settings import STATIC_ROOT
+from django.contrib.staticfiles.storage import StaticFilesStorage
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -42,6 +45,7 @@ INSTALLED_APPS = [
     "product",
     "order",
     "debug_toolbar",
+    "rest_framework.authtoken",
 ]
 
 MIDDLEWARE = [
@@ -53,6 +57,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "bookstore.urls"
@@ -75,14 +80,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "bookstore.wsgi.application"
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
+        "NAME": os.environ.get("SQL_DATABASE", BASE_DIR / "db.sqlite3"),
+        "USER": os.environ.get("SQL_USER", "user"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
+        "HOST": os.environ.get("SQL_HOST", "localhost"),
+        "PORT": os.environ.get("SQL_PORT", "5432"),
     }
 }
 
@@ -128,13 +141,28 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
+# REST Framework settings
+REST_FRAMEWORK = {
+'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+'PAGE_SIZE': 10,
+'DEFAULT_AUTHENTICATION_CLASSES': [
+'rest_framework.authentication.BasicAuthentication',
+'rest_framework.authentication.SessionAuthentication',
+'rest_framework.authentication.TokenAuthentication',
+],
+}
+
 # Debug toolbar settings
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
-# REST Framework settings
-REST_FRAMEWORK = {
-'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-'PAGE_SIZE': 10
-}
+#SECRET_KEY = os.environ.get("SECRET_KEY")
+
+#DEBUG = int(os.environ.get("DEBUG", default=0))
+
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bookstore-app-api-738d721992b2.herokuapp.com']
+
+STATIC_ROOT = BASE_DIR / "staticfiles"

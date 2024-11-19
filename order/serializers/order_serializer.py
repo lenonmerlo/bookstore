@@ -1,11 +1,14 @@
-from order.models.order import Order
 from rest_framework import serializers
-from product.models.product import Product
+
+from order.models import Order
+from product.models import Product
 from product.serializers.product_serializer import ProductSerializer
 
 class OrderSerializer(serializers.ModelSerializer):
-    product = ProductSerializer(required=False, many=True)  # Este campo é de leitura
-    products_id = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), write_only=True, many=True)  # Campo de escrita
+    product = ProductSerializer(read_only=True, many=True)
+    product_id = serializers.PrimaryKeyRelatedField(
+        queryset=Product.objects.all(), write_only=True, many=True
+    )
     total = serializers.SerializerMethodField()
 
     def get_total(self, instance):
@@ -14,17 +17,14 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['product', 'total', 'user', 'products_id']
-        extra_kwargs = {'product': {'required': False}}  # Campo 'product' não é obrigatório na criação
+        fields = ["product", "total", "product_id", "user"]
+        extra_kwargs = {"product": {"required": False}}
 
     def create(self, validated_data):
-        product_data = validated_data.pop('products_id')  # Remove o campo 'products_id' dos dados validados
-        user_data = validated_data.pop('user')  # Remove o campo 'user' dos dados validados
+        product_data = validated_data.pop("product_id")
+        user_data = validated_data.pop("user")
 
-        # Cria o pedido com o usuário
         order = Order.objects.create(user=user_data)
-
-        # Adiciona os produtos ao pedido
         for product in product_data:
             order.product.add(product)
 
