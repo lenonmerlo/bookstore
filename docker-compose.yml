@@ -1,4 +1,4 @@
-version: "3.9" # ou a versão correta do Compose que você está usando
+version: "3.9"
 
 services:
   db:
@@ -14,7 +14,7 @@ services:
 
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn bookstore.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - app_data:/usr/src/app/
     ports:
