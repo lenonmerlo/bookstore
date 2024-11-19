@@ -36,7 +36,7 @@ jobs:
         run: |
           docker run --rm myapp pytest
 
-      - name: Deploy to Render (or outra plataforma)
+      - name: Deploy to Render
         run: |
-          # Exemplo de deploy no Render, ajuste conforme necessário
-          curl -X POST https://api.render.com/deploy/your-deploy-endpoint
+          curl -X POST https://api.render.com/v1/services/your-service-id/deployments \
+          -H "Authorization: Bearer your-api-key"
