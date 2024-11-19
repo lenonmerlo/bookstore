@@ -156,7 +156,7 @@ REST_FRAMEWORK = {
 # Debug toolbar settings
 INTERNAL_IPS = [
     "127.0.0.1",
-    "lenonmerlo.pythonanywhere.com"
+    
 ]
 
 #SECRET_KEY = os.environ.get("SECRET_KEY")
@@ -164,6 +164,7 @@ INTERNAL_IPS = [
 #DEBUG = int(os.environ.get("DEBUG", default=0))
 
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bookstore-app-api-738d721992b2.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', , 'bookstore.onrender.com']
+
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
