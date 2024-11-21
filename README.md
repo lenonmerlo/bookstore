@@ -1,3 +1,8 @@
+
+# Treinando Proetry com Django
+
+# Nessa branch foi adicionado paginação
+=======
 # Bookstore
 
 Bookstore APP from Backend Python
