@@ -1,8 +1,17 @@
 
 from pathlib import Path
-from decouple import Config
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Security settings
+SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-9oo4ilkuwgg4f1%0ivt0!@^l7s&=npdh30@a%_g@*z9#!k4$v3")  # Use environment variable in production
+
+DEBUG = int(os.environ.get("DEBUG", default=0))  # Make sure to set DEBUG via environment variables
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'lenonmerlo.pythonanywhere.com', 'https://bookstore-t1ec.onrender.com']
+
+# Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
