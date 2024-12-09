@@ -15,9 +15,6 @@ Docker && docker-compose
 
 1. Clone this project
 
-   ```shell
-   git clone github.com/maxh33/bookstore
-   ```
 
 2. Install dependencies:
 
