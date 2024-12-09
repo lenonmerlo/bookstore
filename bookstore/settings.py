@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
-from decouple import config  # Importação para variáveis de ambiente
+from decouple import config
+from pytest import Config  # Importação para variáveis de ambiente
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,6 +10,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-9oo4ilkuwgg4f1%0ivt0!@^l7s&=npdh30@a%_g@*z9#!k4$v3")  # Use environment variable in production
 DEBUG = int(os.environ.get("DEBUG", default=0))  # Make sure to set DEBUG via environment variables
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'lenonmerlo.pythonanywhere.com', 'bookstore-t1ec.onrender.com']
+# Configuração do arquivo .env
+config = Config(search_path=os.path.dirname(__file__))  # Certifica que o caminho está correto
 
 # Application definition
 INSTALLED_APPS = [
@@ -63,14 +66,15 @@ WSGI_APPLICATION = "bookstore.wsgi.application"
 # Configuração do banco de dados
 DATABASES = {
     'default': {
-        'ENGINE': config('SQL_ENGINE'),
-        'NAME': config('SQL_DATABASE'),
-        'USER': config('SQL_USER'),
-        'PASSWORD': config('SQL_PASSWORD'),
-        'HOST': config('SQL_HOST'),
-        'PORT': config('SQL_PORT', cast=int),
+        'ENGINE': config('SQL_ENGINE'),  # django.db.backends.postgresql
+        'NAME': config('SQL_DATABASE'),  # bookstore_dev_db
+        'USER': config('SQL_USER'),      # bookstore_dev
+        'PASSWORD': config('SQL_PASSWORD'),  # bookstore_dev
+        'HOST': config('SQL_HOST', default='localhost'),  # db
+        'PORT': config('SQL_PORT', default=5432),  # 5432
     }
 }
+
 
 # Autenticação de senhas
 AUTH_PASSWORD_VALIDATORS = [
