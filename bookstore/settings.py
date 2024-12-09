@@ -1,25 +1,8 @@
-import environ
+
 from pathlib import Path
 from decouple import Config
 
-# Configuração do arquivo de ambiente
-config = Config(".env")  # Se for usar o arquivo '.env', se mantiver 'env.dev', ajuste conforme necessário
 
-# Inicialização do django-environ
-env = environ.Env()
-# Lê as variáveis do arquivo de ambiente, pode ser '.env' ou '.env.dev' conforme o seu caso
-environ.Env.read_env(env.str('DJANGO_ENV_FILE', '.env.dev'))
-  # Isso lê as variáveis do arquivo de ambiente
-
-# Caminho base do projeto
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-# Configurações de segurança
-SECRET_KEY = env('SECRET_KEY', default='django-insecure-9oo4ilkuwgg4f1%0ivt0!@^l7s&=npdh30@a%_g@*z9#!k4$v3')
-DEBUG = env.bool('DEBUG', default=True)
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost', '127.0.0.1', '[::1]'])
-
-# Definição dos apps instalados
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -69,12 +52,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "bookstore.wsgi.application"
 
-# Configuração de arquivos estáticos
-STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-# Configuração do banco de dados
 DATABASES = {
     'default': {
         'ENGINE': config('SQL_ENGINE'),
@@ -86,7 +64,7 @@ DATABASES = {
     }
 }
 
-# Validação de senha
+
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
@@ -94,16 +72,13 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-# Configurações de internacionalização
+
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-# Tipo de campo de chave primária padrão
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# Configuração do REST Framework
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
@@ -114,10 +89,4 @@ REST_FRAMEWORK = {
     ],
 }
 
-# Configuração da debug toolbar
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
 
-# Hosts permitidos, incluindo os do arquivo de ambiente
-ALLOWED_HOSTS += env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1', 'bookstore-ceml.onrender.com'])
