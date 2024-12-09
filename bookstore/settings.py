@@ -10,8 +10,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-9oo4ilkuwgg4f1%0ivt0!@^l7s&=npdh30@a%_g@*z9#!k4$v3")  # Use environment variable in production
 DEBUG = int(os.environ.get("DEBUG", default=0))  # Make sure to set DEBUG via environment variables
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'lenonmerlo.pythonanywhere.com', 'bookstore-t1ec.onrender.com']
-# Configuração do arquivo .env
-config = Config(search_path=os.path.dirname(__file__))  # Certifica que o caminho está correto
 
 # Application definition
 INSTALLED_APPS = [
