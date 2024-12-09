@@ -9,7 +9,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-9oo4ilkuwgg4f1%0ivt0!
 
 DEBUG = int(os.environ.get("DEBUG", default=0))  # Make sure to set DEBUG via environment variables
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'lenonmerlo.pythonanywhere.com', 'bookstore-ceml.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'lenonmerlo.pythonanywhere.com', 'https://bookstore-t1ec.onrender.com']
 
 # Application definition
 INSTALLED_APPS = [
