@@ -1,4 +1,4 @@
-# Bookstore API
+
 
 Bem-vindo à API da Bookstore! Esta API foi desenvolvida usando Django e Django REST Framework e fornece funcionalidades para gerenciar produtos e pedidos de uma livraria.
 
@@ -97,4 +97,4 @@ Licença
 Este projeto está licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
 
 
-Isso deve fornecer uma boa base para o seu README.md. Claro, você pode ajustar e adicionar mais informações conforme necessário. Se precisar de mais alguma coisa, estou aqui para ajudar! 😊
+
