@@ -1,0 +1,22 @@
+databases:
+  - name: bookstoredb                    # Nome do recurso do banco de dados (pode ser qualquer nome descritivo)
+    plan: free                           # Plano gratuito do Render
+    databaseName: bookstore_dev_db       # Nome real do banco de dados que você está utilizando
+    user: bookstore_dev                  # Usuário configurado para o banco de dados
+
+services:
+  - type: web
+    plan: free
+    name: bookstore                      # Nome do serviço (pode ser o nome do seu projeto)
+    runtime: python                      # Especifica o runtime como Python
+    buildCommand: "./build.sh"           # Comando de build, ajuste se necessário
+    startCommand: "python -m gunicorn bookstore.asgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bookstoredb              # Deve coincidir com o nome definido no banco de dados acima
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true              # Gera automaticamente uma SECRET_KEY para o Django
+      - key: WEB_CONCURRENCY
+        value: 4                         # Ajuste para o número de workers desejado
