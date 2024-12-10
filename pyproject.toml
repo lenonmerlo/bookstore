@@ -6,7 +6,7 @@ authors = ["maxh33 <contact@maxhaider.dev>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.12"
 python-decouple = "^3.6"
 django = "^3.2.25"
 django-rest-framework = "^0.1.0"

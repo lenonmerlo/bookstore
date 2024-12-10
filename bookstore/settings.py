@@ -1,6 +1,8 @@
 from pathlib import Path
 import os
 from decouple import config
+# Import dj-database-url at the beginning of the file.
+import dj_database_url
 # from pytest import Config  # Importação para variáveis de ambiente
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -64,14 +66,16 @@ WSGI_APPLICATION = "bookstore.wsgi.application"
 # Configuração do banco de dados
 DATABASES = {
     'default': {
-        'ENGINE': config('SQL_ENGINE'),  # django.db.backends.postgresql
-        'NAME': config('SQL_DATABASE'),  # bookstore_dev_db
-        'USER': config('SQL_USER'),      # bookstore_dev
-        'PASSWORD': config('SQL_PASSWORD'),  # bookstore_dev
-        'HOST': config('SQL_HOST', default='localhost'),  # db
-        'PORT': config('SQL_PORT', default=5432),  # 5432
+        'ENGINE': config('SQL_ENGINE', default='django.db.backends.postgresql'),  # django.db.backends.postgresql
+        'NAME': config('SQL_DATABASE', default='bookstore_dev_db'),              # Nome do banco de dados
+        'USER': config('SQL_USER', default='bookstore_dev'),                     # Usuário do banco de dados
+        'PASSWORD': config('SQL_PASSWORD', default='bookstore_dev'),             # Senha do banco de dados
+        'HOST': config('SQL_HOST', default='localhost'),                         # Host do banco de dados
+        'PORT': config('SQL_PORT', default=5432),                                # Porta do banco de dados
+        'CONN_MAX_AGE': config('SQL_CONN_MAX_AGE', cast=int, default=600),       # Tempo máximo de reutilização da conexão
     }
 }
+
 
 
 # Autenticação de senhas
