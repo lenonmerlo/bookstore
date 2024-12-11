@@ -7,7 +7,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Segurança
 SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-9oo4ilkuwgg4f1%0ivt0!@^l7s&=npdh30@a%_g@*z9#!k4$v3")
-DEBUG = int(os.environ.get("DEBUG", default=0))  # Via variáveis de ambiente
+DEBUG = os.environ.get("DEBUG", "False") == "True"
+
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'lenonmerlo.pythonanywhere.com', 'bookstore-t1ec.onrender.com']
 
 INSTALLED_APPS = [
