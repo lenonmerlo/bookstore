@@ -3,13 +3,14 @@ version: "3.9"
 services:
   db:
     image: postgres:13.0-alpine
+    hostname: postgres-instance
     ports:
       - 5432:5432
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=bookstore_dev
-      - POSTGRES_PASSWORD=bookstore_dev
+      - POSTGRES_PASSWORD=E3I1NmSjMsIUW9gA
       - POSTGRES_DB=bookstore_dev_db
 
   web:
@@ -19,8 +20,15 @@ services:
       - app_data:/usr/src/app/
     ports:
       - 8000:8000
-    env_file:
-      - .env
+    environment:
+      - DEBUG=True
+      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+      - SQL_ENGINE=django.db.backends.postgresql
+      - SQL_DATABASE=bookstore_dev_db
+      - SQL_USER=bookstore_dev
+      - SQL_PASSWORD=E3I1NmSjMsIUW9gA
+      - SQL_HOST=postgres-instance
+      - SQL_PORT=5432
     depends_on:
       - db
 

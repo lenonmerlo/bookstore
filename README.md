@@ -1,4 +1,4 @@
-
+# Bookstore
 
 Bem-vindo à API da Bookstore! Esta API foi desenvolvida usando Django e Django REST Framework e fornece funcionalidades para gerenciar produtos e pedidos de uma livraria.
 
@@ -16,14 +16,19 @@ Bem-vindo à API da Bookstore! Esta API foi desenvolvida usando Django e Django 
 
 1. Clone o repositório:
 
-   ```sh
-   git clone https://github.com/seu-usuario/bookstore.git
-   cd bookstore
+```sh
+git clone https://github.com/seu-usuario/bookstore.git
+cd bookstore
+```
+
 Instale as dependências do projeto usando Poetry:
 
-sh
+```sh
 poetry install
-Configuração
+```
+
+## Configuração
+
 Crie um arquivo .env ou env.dev no diretório raiz do projeto com as seguintes variáveis:
 
 plaintext
@@ -36,22 +41,31 @@ SQL_USER=bookstore_dev
 SQL_PASSWORD=bookstore_dev
 SQL_HOST=db
 SQL_PORT=5432
+
 Configure o Docker Compose para iniciar os serviços necessários:
 
-sh
+```sh
 docker-compose up --build
-Executando o Projeto
+```
+
+## Executando o Projeto
+
 Inicie os serviços Docker:
 
-sh
+```sh
 docker-compose up -d
+```
+
 Acesse a aplicação no navegador:
 
 http://localhost:8000
-Endpoints
+
+
+## Endpoints
+
 A API possui os seguintes endpoints principais:
 
-Produtos
+### Produtos
 
 GET /bookstore/v1/product/ - Lista todos os produtos
 
@@ -63,7 +77,7 @@ PUT /bookstore/v1/product/:id/ - Atualiza um produto pelo ID
 
 DELETE /bookstore/v1/product/:id/ - Deleta um produto pelo ID
 
-Pedidos
+### Pedidos
 
 GET /bookstore/v1/order/ - Lista todos os pedidos
 
@@ -75,12 +89,16 @@ PUT /bookstore/v1/order/:id/ - Atualiza um pedido pelo ID
 
 DELETE /bookstore/v1/order/:id/ - Deleta um pedido pelo ID
 
-Testes
+## Testes
+
 Execute os testes do projeto usando o comando:
 
-sh
+```sh
 docker-compose exec web python manage.py test
-Contribuição
+```
+
+## Contribuição
+
 Se você deseja contribuir com este projeto, por favor siga os passos abaixo:
 
 Faça um fork do repositório
@@ -93,8 +111,6 @@ Faça um push para a branch (git push origin feature/nova-feature)
 
 Abra um Pull Request
 
-Licença
+## Licença
+
 Este projeto está licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
-
-
-

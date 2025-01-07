@@ -44,5 +44,5 @@ RUN poetry install --no-dev
 # Expose port 8000 for the app
 EXPOSE 8000
 
-CMD ["gunicorn", "bookstore.wsgi:application", "--bind", "0.0.0.0:8000"]
-
+ENTRYPOINT [ "scripts/start.sh" ]
+CMD [ "" ]
