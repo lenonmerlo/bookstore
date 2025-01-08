@@ -1,7 +1,6 @@
 from pathlib import Path
 import os
 from decouple import config
-import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -60,12 +59,12 @@ WSGI_APPLICATION = "bookstore.wsgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': config('SQL_ENGINE', default='django.db.backends.mysql'),
-        'NAME': config('SQL_DATABASE', default='bookstore_db'),
-        'USER': config('SQL_USER', default='root'),
+        'ENGINE': config('SQL_ENGINE', default='django.db.backends.postgresql'),
+        'NAME': config('SQL_DATABASE', default='bookstore_dev_db'),
+        'USER': config('SQL_USER', default='bookstore_dev'),
         'PASSWORD': config('SQL_PASSWORD'),
         'HOST': config('SQL_HOST', default='localhost'),
-        'PORT': config('SQL_PORT', default=3306, cast=int),
+        'PORT': config('SQL_PORT', default=5432, cast=int),
     }
 }
 
